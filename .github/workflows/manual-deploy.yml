@@ -11,17 +11,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
-      with:
-        ref: ${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.ref }}
 
-    - name: Add api remote origin
-      run: |
-        git remote add heroku-api https://heroku:${{ secrets.HEROKU_BACKEND_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
-    - name: Deploy api to Heroku
-      run: |
-        git subtree push --prefix server heroku master
+      - name: Add api remote origin
+        run: |
+          git remote add heroku-api https://heroku:${{ secrets.HEROKU_BACKEND_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+      - name: Deploy api to Heroku
+        run: |
+          git subtree push --prefix server heroku master
+    
   # server:
   #   runs-on: ubuntu-latest
   #   steps:
