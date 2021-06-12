@@ -1,0 +1,20 @@
+name: Manually deploy your code
+
+on:
+  workflow_dispatch:
+    inputs:
+        environment:
+          description: 'Define env name'     
+          required: false
+          default: 'prod'
+        branch:
+          description: 'Define branch name'     
+          required: true
+          default: 'main'
+jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Log level: ${{ github.event.inputs.logLevel }}"
+        echo "Tags: ${{ github.event.inputs.tags }}" 
