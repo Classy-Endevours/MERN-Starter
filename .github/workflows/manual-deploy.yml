@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          ref: ${{ github.ref }}
       - name: Get branch name
         id: vars
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
@@ -39,7 +40,7 @@ jobs:
           HEROKU_BACKEND_APP_NAME: ${{ secrets.HEROKU_BACKEND_APP_NAME }}
       - name: Push to Heroku
         # run: echo git push heroku `git subtree split --prefix server $BRANCH_NAME`:master
-        run: git push heroku `git subtree split --prefix server $BRANCH_NAME`:master
+        run: git subtree push --prefix server heroku main
         # run: eval git subtree push --prefix server heroku $BRANCH_NAME:main
         env:
           BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
