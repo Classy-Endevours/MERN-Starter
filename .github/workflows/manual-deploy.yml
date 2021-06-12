@@ -9,41 +9,52 @@ on:
           default: 'prod'
 
 jobs:
-  server:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
-      - name: Get branch name
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+  steps:
+    - uses: actions/checkout@v1
 
-      - name: Set branch name
-        run: echo ${{ steps.vars.outputs.short_ref }}
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_BACKEND_API_KEY }}
-          HEROKU_EMAIL: ${{ secrets.HEROKU_BACKEND_EMAIL }}
-      - name: Add Heroku remote
-        run: heroku git:remote --app $HEROKU_BACKEND_APP_NAME
-        env:
-          HEROKU_BACKEND_APP_NAME: ${{ secrets.HEROKU_BACKEND_APP_NAME }}
-      - name: Push to Heroku
-        # run: echo git push heroku `git subtree split --prefix server $BRANCH_NAME`:master
-        run: git subtree push --prefix server heroku main
-        # run: eval git subtree push --prefix server heroku $BRANCH_NAME:main
-        env:
-          BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
+    - name: Add api remote origin
+      run: |
+        git remote add heroku-api https://heroku:${{ secrets.HEROKU_BACKEND_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+    - name: Deploy api to Heroku
+      run: |
+        git subtree push --prefix server heroku master
+  # server:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.ref }}
+  #     - name: Get branch name
+  #       id: vars
+  #       run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+  #     - name: Set branch name
+  #       run: echo ${{ steps.vars.outputs.short_ref }}
+  #     - name: Heroku login credentials
+  #       run: |
+  #         cat > ~/.netrc <<EOF
+  #           machine api.heroku.com
+  #             login $HEROKU_EMAIL
+  #             password $HEROKU_API_KEY
+  #           machine git.heroku.com
+  #             login $HEROKU_EMAIL
+  #             password $HEROKU_API_KEY
+  #         EOF
+  #       env:
+  #         HEROKU_API_KEY: ${{ secrets.HEROKU_BACKEND_API_KEY }}
+  #         HEROKU_EMAIL: ${{ secrets.HEROKU_BACKEND_EMAIL }}
+  #     - name: Add Heroku remote
+  #       run: heroku git:remote --app $HEROKU_BACKEND_APP_NAME
+  #       env:
+  #         HEROKU_BACKEND_APP_NAME: ${{ secrets.HEROKU_BACKEND_APP_NAME }}
+  #     - name: Push to Heroku
+  #       # run: echo git push heroku `git subtree split --prefix server $BRANCH_NAME`:master
+  #       run: git subtree push --prefix server heroku main
+  #       # run: eval git subtree push --prefix server heroku $BRANCH_NAME:main
+  #       env:
+  #         BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
 
   # client:
   #   runs-on: ubuntu-latest
