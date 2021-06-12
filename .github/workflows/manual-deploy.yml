@@ -12,15 +12,27 @@ on:
           required: true
           default: 'main'
 jobs:
-  printInputs:
+  example:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Set output
-          id: vars
-          run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
       - name: Check output
-          run: echo ${{ steps.vars.outputs.short_ref }}
-      - run: |
-          echo "Log level: ${{ github.event.inputs.environment }}"
-          echo "Tags: ${{ github.event.inputs.branch }}" 
+        run: echo ${{ steps.vars.outputs.short_ref }}
+# jobs:
+#   printInputs:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Set output
+#           id: vars
+#           run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+#       - name: Check output
+#           run: echo ${{ steps.vars.outputs.short_ref }}
+#       - run: |
+#           echo "Log level: ${{ github.event.inputs.environment }}"
+#           echo "Tags: ${{ github.event.inputs.branch }}" 
