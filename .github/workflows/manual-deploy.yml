@@ -38,7 +38,7 @@ jobs:
         env:
           HEROKU_BACKEND_APP_NAME: ${{ secrets.HEROKU_BACKEND_APP_NAME }}
       - name: Push to Heroku
-        run: echo ::git subtree push --prefix server heroku $BRANCH_NAME:main
+        run: eval git subtree push --prefix server heroku $BRANCH_NAME:main
         env:
           BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
 
@@ -71,6 +71,6 @@ jobs:
         env:
           HEROKU_FRONTEND_APP_NAME: ${{ secrets.HEROKU_FRONTEND_APP_NAME }}
       - name: Push to Heroku
-        run: echo ::git subtree push --prefix client heroku $BRANCH_NAME:main
+        run: eval git subtree push --prefix client heroku $BRANCH_NAME:main
         env:
           BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
