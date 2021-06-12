@@ -34,7 +34,7 @@ jobs:
           git remote add heroku-client https://heroku:${{ secrets.HEROKU_FRONTEND_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_FRONTEND_APP_NAME }}.git
       - name: Deploy api to Heroku
         run: |
-          git subtree push --prefix server heroku-client main
+          git subtree push --prefix client heroku-client main
     
   # server:
   #   runs-on: ubuntu-latest
