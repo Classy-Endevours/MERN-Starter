@@ -16,5 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "Log level: ${{ github.event.inputs.logLevel }}"
-        echo "Tags: ${{ github.event.inputs.tags }}" 
+        echo "Log level: ${{ github.event.inputs.environment }}"
+        echo "Tags: ${{ github.event.inputs.branch }}" 
+    - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+    - name: Check output
+      run: echo ${{ steps.vars.outputs.short_ref }}
