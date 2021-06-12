@@ -7,10 +7,7 @@ on:
           description: 'Define env name'     
           required: false
           default: 'prod'
-        branch:
-          description: 'Define branch name'     
-          required: true
-          default: 'main'
+
 jobs:
   server:
     runs-on: ubuntu-latest
@@ -41,7 +38,7 @@ jobs:
         env:
           HEROKU_BACKEND_APP_NAME: ${{ secrets.HEROKU_BACKEND_APP_NAME }}
       - name: Push to Heroku
-        run: echo "::git subtree push --prefix server heroku $BRANCH_NAME:main"
+        run: echo ::git subtree push --prefix server heroku $BRANCH_NAME:main
         env:
           BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
 
@@ -74,6 +71,6 @@ jobs:
         env:
           HEROKU_FRONTEND_APP_NAME: ${{ secrets.HEROKU_FRONTEND_APP_NAME }}
       - name: Push to Heroku
-        run: echo "::git subtree push --prefix client heroku $BRANCH_NAME:main"
+        run: echo ::git subtree push --prefix client heroku $BRANCH_NAME:main
         env:
           BRANCH_NAME: ${{ steps.vars.outputs.short_ref }}
