@@ -34,5 +34,5 @@ jobs:
           api_key: ${{secrets.HEROKU_FRONTEND_API_KEY}}
           email: ${{secrets.HEROKU_FRONTEND_EMAIL}}
           app_name: ${{secrets.HEROKU_FRONTEND_APP_NAME}}
-          heroku_branch: "master"
+          heroku_branch: "main"
           subfolder: "client"
