@@ -35,4 +35,4 @@ jobs:
           email: ${{secrets.HEROKU_FRONTEND_EMAIL}}
           app_name: ${{secrets.HEROKU_FRONTEND_APP_NAME}}
           heroku_branch: "main"
-          subfolder: "server"
+          subfolder: "client"
