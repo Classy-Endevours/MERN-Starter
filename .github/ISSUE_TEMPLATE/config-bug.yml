@@ -19,7 +19,7 @@ body:
         ...
       render: bash
     validations:
-    required: true
+      required: true
   - type: input
     id: oneline
     attributes:
@@ -29,7 +29,7 @@ body:
     validations:
       required: false
   - type: input
-    id: oneline
+    id: version
     attributes:
       label: What is the version of the desktop/mobile
       description: Tell us the version for your desktop/mobile
