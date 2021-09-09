@@ -1,25 +1,24 @@
 name: Config Issue Report
 description: File a issue report
-title: "[Issue]: "
+title: '[Issue]: '
 labels: [improvement]
-
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to fill out this issue report!
   - type: textarea
-  id: repro
-  attributes:
-    label: Reproduction steps
-    description: "How do you trigger this issue? Please walk us through it step by step."
-    value: |
-      1.
-      2.
-      3.
-      ...
-    render: bash
-  validations:
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: 'How do you trigger this issue? Please walk us through it step by step.'
+      value: |
+        1.
+        2.
+        3.
+        ...
+      render: bash
+    validations:
     required: true
   - type: input
     id: oneline
