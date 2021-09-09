@@ -1,41 +1,42 @@
-name: Config Bug Report
-description: File a bug report
-title: "[Bug]: "
-labels: [bug, triage]
-assignees:
-  - octocat
+name: Config Issue Report
+description: File a issue report
+title: "[Issue]: "
+labels: [improvement]
+
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Thanks for taking the time to fill out this issue report!
+  - type: textarea
+  id: repro
+  attributes:
+    label: Reproduction steps
+    description: "How do you trigger this issue? Please walk us through it step by step."
+    value: |
+      1.
+      2.
+      3.
+      ...
+    render: bash
+  validations:
+    required: true
   - type: input
-    id: contact
+    id: oneline
     attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
+      label: Which part of project it will effect
+      description: Which area in project will get affected by the issue, can be functional or operational
+      placeholder: ex. security, business
     validations:
       required: false
-  - type: textarea
-    id: what-happened
+  - type: input
+    id: oneline
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      label: What is the version of the desktop/mobile
+      description: Tell us the version for your desktop/mobile
+      placeholder: ex. desktop/mobile
     validations:
-      required: true
-  - type: dropdown
-    id: version
-    attributes:
-      label: Version
-      description: What version of our software are you running?
-      options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
-    validations:
-      required: true
+      required: false
   - type: dropdown
     id: browsers
     attributes:
@@ -52,11 +53,8 @@ body:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
-  - type: checkboxes
-    id: terms
+  - type: textarea
+    id: context
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: Other context
+      description: please describe other context for the issue
